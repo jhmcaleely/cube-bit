@@ -2,7 +2,7 @@ import cubebit as cb
 import time
 from random import randint
 
-side = 5
+side = 4
 
 cb.create(side)
 

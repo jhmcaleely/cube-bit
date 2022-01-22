@@ -6,10 +6,12 @@
 from rpi_ws281x import *
 
 # Global settings
-side = 5
+side = 4
 side2 = side * side
 side3 = side2 * side
 cube = None
+# 40 reflects maximum brightness possible on 2.5A power supply, such as
+# the official Raspberry Pi power brick.
 brightness = 40
 
 def create (lside=3, lbrightness=40):
