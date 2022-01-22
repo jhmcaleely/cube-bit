@@ -10,18 +10,17 @@ side = 4
 side2 = side * side
 side3 = side2 * side
 cube = None
-# 40 reflects maximum brightness possible on 2.5A power supply, such as
-# the official Raspberry Pi power brick.
-brightness = 40
 
 def create (lside=3, lbrightness=40):
+        # 40 reflects maximum brightness possible on 2.5A power supply, such as
+        # the official Raspberry Pi power brick.
+
         global side, side2, side3, cube
         if (cube == None):
                 side = lside
                 side2 = side * side
                 side3 = side2 * side
-                brightness = lbrightness
-                cube = Adafruit_NeoPixel(side3, 18, 800000, 5, False, brightness)
+                cube = PixelStrip(num=side3, pin=18, dma=5, brightness=lbrightness)
                 cube.begin()
 
 def cleanup():
