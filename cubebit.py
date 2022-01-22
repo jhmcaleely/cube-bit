@@ -1,6 +1,6 @@
 # Python module for 4tronix Cube:Bit which is basically a port of the Makecode package
 # Layered over the Adafruit neopixel library
-# Install that following the instructions here: https://learn.adafruit.com/neopixels-on-raspberry-pi/software
+# Install that following the instructions here: https://learn.adafruit.com/neopixels-on-raspberry-pi/
 # Cube:Bit available from shop.4tronix.co.uk
 
 from rpi_ws281x import *
