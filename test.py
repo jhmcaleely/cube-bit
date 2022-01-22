@@ -1,7 +1,7 @@
 import cubebit as cb
 import time
 
-side = 5
+side = 4
 
 cb.create(side)
 
