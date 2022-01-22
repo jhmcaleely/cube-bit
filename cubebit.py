@@ -7,20 +7,16 @@ from rpi_ws281x import *
 
 # Global settings
 side = 4
-side2 = side * side
-side3 = side2 * side
 cube = None
 
 def create (lside=3, lbrightness=40):
         # 40 reflects maximum brightness possible on 2.5A power supply, such as
         # the official Raspberry Pi power brick.
 
-        global side, side2, side3, cube
+        global side, cube
         if (cube == None):
                 side = lside
-                side2 = side * side
-                side3 = side2 * side
-                cube = PixelStrip(num=side3, pin=18, dma=5, brightness=lbrightness)
+                cube = PixelStrip(num=(side*side*side), pin=18, dma=5, brightness=lbrightness)
                 cube.begin()
 
 def cleanup():
@@ -42,23 +38,23 @@ def map(x, y, z):
                     q = side * (side - x) - 1 - y
                 else:
                     q = (side - 1 - x) * side + y
-            return z*side2 + q
-        return cubeSide3;    # return non-existent pixel for out of bounds
+            return z*(side*side) + q
+        return None;    # return non-existent pixel for out of bounds
         
 
 def setColor(color):
-        for i in range(side3):
+        for i in range(cube.numPixels()):
                 setPixel(i, color)
 
 def setPixel(ID, color):
-        if (ID <= side3):
+        if (ID <= cube.numPixels()):
                 cube.setPixelColor(ID, color)
 
 def show():
         cube.show()
 
 def clear():
-        for i in range(side3):
+        for i in range(cube.numPixels()):
                 setPixel(i, 0)
 
 def rainbow():
@@ -66,7 +62,7 @@ def rainbow():
         for z in range(side):
                 for y in range(side):
                         for x in range(side):
-                                setPixel(map(x,y,z), wheel(i * 256 / side3))
+                                setPixel(map(x,y,z), wheel(i * 256 / cube.numPixels()))
                                 i += 1
 
 def fromRGB(red, green, blue):
